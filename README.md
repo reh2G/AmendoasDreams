@@ -1,4 +1,4 @@
-# 🌙 Amendoa's Dreams
+# 🌙 Amêndoa's Dreams
 
 > Diário digital de sonhos pessoal — Registre, organize e consulte seus sonhos com facilidade.
 
@@ -6,7 +6,7 @@
 
 ## 📖 Sobre o Projeto
 
-**Amendoa's Dreams** é uma aplicação web desenvolvida para registrar sonhos logo ao acordar. Mais do que um simples diário, este projeto foi concebido como um ambiente prático para aprender e aplicar **SQL**, **C# (.NET)** e **PHP** em conjunto, construindo algo real e com propósito pessoal.
+**Amêndoa's Dreams** é uma aplicação web desenvolvida para registrar sonhos logo ao acordar. Mais do que um simples diário, este projeto foi concebido como um ambiente prático para aprender e aplicar **SQL**, **C# (.NET)** e **PHP** em conjunto, construindo algo real e com propósito pessoal.
 
 A aplicação permite que o usuário mantenha um histórico completo de seus sonhos, incluindo título, descrição, data, horários, humor ao acordar e tags. Tudo isso com uma interface simples e uma arquitetura desacoplada, onde o frontend PHP consome uma API REST desenvolvida em C#.
 
@@ -275,4 +275,4 @@ Inspirado no desejo de registrar e compreender os sonhos — e de construir algo
 
 ---
 
-**Amendoa's Dreams** — *Registre seus sonhos, descubra seus padroes.* 🌙
+**Amêndoa's Dreams** — *Registre seus sonhos, descubra seus padrões.* 🌙
