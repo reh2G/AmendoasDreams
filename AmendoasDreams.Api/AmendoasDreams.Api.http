@@ -1,0 +1,6 @@
+@AmendoasDreams.Api_HostAddress = http://localhost:5217
+
+GET {{AmendoasDreams.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
