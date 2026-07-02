@@ -31,3 +31,6 @@
 /home/gmissima/Projetos/AmendoasDreams/AmendoasDreams.Api/obj/Debug/net8.0/AmendoasDreams.Api.pdb
 /home/gmissima/Projetos/AmendoasDreams/AmendoasDreams.Api/obj/Debug/net8.0/AmendoasDreams.Api.genruntimeconfig.cache
 /home/gmissima/Projetos/AmendoasDreams/AmendoasDreams.Api/obj/Debug/net8.0/ref/AmendoasDreams.Api.dll
+/home/gmissima/Projetos/AmendoasDreams/AmendoasDreams.Api/bin/Debug/net8.0/Dapper.dll
+/home/gmissima/Projetos/AmendoasDreams/AmendoasDreams.Api/bin/Debug/net8.0/Npgsql.dll
+/home/gmissima/Projetos/AmendoasDreams/AmendoasDreams.Api/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
