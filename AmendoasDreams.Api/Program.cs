@@ -5,8 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddScoped<IDbConnection>(
-    sp => new NpgsqlConnection(
+builder.Services.AddScoped<IDbConnection>(sp => 
+    new NpgsqlConnection(
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
@@ -26,9 +26,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
