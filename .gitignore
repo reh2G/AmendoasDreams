@@ -8,6 +8,10 @@ amendoas-dreams-escopo.md
 # Configurações do VS Code
 .vscode/
 
+# Lixo
+AmendoasDreams.Api/bin/
+AmendoasDreams.Api/obj/
+
 # Arquivos de sistema
 .DS_Store
 Thumbs.db
