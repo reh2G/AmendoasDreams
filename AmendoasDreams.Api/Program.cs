@@ -1,24 +1,25 @@
+using Dapper;
 using Npgsql;
 using System.Data;
+using AmendoasDreams.Api.Infrastructure;
+
+SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+SqlMapper.AddTypeHandler(new TimeOnlyTypeHandler());
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddScoped<IDbConnection>(sp => 
+builder.Services.AddScoped<IDbConnection>(sp =>
     new NpgsqlConnection(
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -38,10 +38,8 @@ public class DreamsController : ControllerBase
                     existing = dream;
                     dreamDictionary[dream.Id] = existing;
                 }
-
                 if (tag is not null)
                     existing.Tags.Add(tag);
-
                 return existing;
             },
             splitOn: "id"
@@ -72,10 +70,8 @@ public class DreamsController : ControllerBase
                     existing = dream;
                     dreamDictionary[dream.Id] = existing;
                 }
-
                 if (tag is not null)
                     existing.Tags.Add(tag);
-
                 return existing;
             },
             new { Id = id },
@@ -83,7 +79,6 @@ public class DreamsController : ControllerBase
         );
 
         var result = dreamDictionary.Values.FirstOrDefault();
-
         if (result is null)
             return NotFound();
 
@@ -100,7 +95,6 @@ public class DreamsController : ControllerBase
             RETURNING id";
 
         var newId = await _connection.ExecuteScalarAsync<int>(sql, dream);
-
         dream.Id = newId;
         return CreatedAtAction(nameof(GetById), new { id = newId }, dream);
     }
@@ -121,7 +115,6 @@ public class DreamsController : ControllerBase
             WHERE id = @Id";
 
         var rows = await _connection.ExecuteAsync(sql, new { dream.Title, dream.Description, dream.DreamDate, dream.SleepTime, dream.WakeTime, dream.Mood, Id = id });
-
         if (rows == 0)
             return NotFound();
 
@@ -133,11 +126,47 @@ public class DreamsController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         const string sql = "DELETE FROM dreams WHERE id = @Id";
-
         var rows = await _connection.ExecuteAsync(sql, new { Id = id });
-
         if (rows == 0)
             return NotFound();
+
+        return NoContent();
+    }
+
+    // POST api/dreams/5/tags/2
+    [HttpPost("{id}/tags/{tagId}")]
+    public async Task<IActionResult> AddTag(int id, int tagId)
+    {
+        const string checkDream = "SELECT COUNT(1) FROM dreams WHERE id = @Id";
+        var dreamExists = await _connection.ExecuteScalarAsync<int>(checkDream, new { Id = id });
+        if (dreamExists == 0)
+            return NotFound(new { message = $"Sonho {id} não encontrado." });
+
+        const string checkTag = "SELECT COUNT(1) FROM tags WHERE id = @Id";
+        var tagExists = await _connection.ExecuteScalarAsync<int>(checkTag, new { Id = tagId });
+        if (tagExists == 0)
+            return NotFound(new { message = $"Tag {tagId} não encontrada." });
+
+        const string sql = @"
+            INSERT INTO dream_tags (dream_id, tag_id)
+            VALUES (@DreamId, @TagId)
+            ON CONFLICT DO NOTHING";
+
+        await _connection.ExecuteAsync(sql, new { DreamId = id, TagId = tagId });
+        return NoContent();
+    }
+
+    // DELETE api/dreams/5/tags/2
+    [HttpDelete("{id}/tags/{tagId}")]
+    public async Task<IActionResult> RemoveTag(int id, int tagId)
+    {
+        const string sql = @"
+            DELETE FROM dream_tags
+            WHERE dream_id = @DreamId AND tag_id = @TagId";
+
+        var rows = await _connection.ExecuteAsync(sql, new { DreamId = id, TagId = tagId });
+        if (rows == 0)
+            return NotFound(new { message = $"Associação entre sonho {id} e tag {tagId} não encontrada." });
 
         return NoContent();
     }
