@@ -45,7 +45,7 @@ A comunicação entre o PHP e a API C# é feita via requisições HTTP (GET, POS
 
 ### Parte 1
 
-- [ ] **Registrar um sonho** com:
+- [x] **Registrar um sonho** com:
   - Título
   - Descrição completa (relato do sonho)
   - Data do sonho
@@ -53,11 +53,13 @@ A comunicação entre o PHP e a API C# é feita via requisições HTTP (GET, POS
   - Horário estimado que acordou
   - Humor ao acordar (ex.: ansioso, feliz, confuso, assustado, neutro)
   - Tags (ex.: pesadelo, lúcido, recorrente, estranho)
-- [ ] **Listar** todos os sonhos (do mais recente ao mais antigo)
-- [ ] **Visualizar** o detalhe completo de um sonho
-- [ ] **Editar** um sonho já registrado
-- [ ] **Deletar** um sonho
-- [ ] **Seed data** — 5 sonhos fictícios pré-cadastrados para demonstração pública da aplicação (via `seed.sql`)
+- [x] **Listar** todos os sonhos (do mais recente ao mais antigo)
+- [x] **Visualizar** o detalhe completo de um sonho
+- [x] **Editar** um sonho já registrado
+- [x] **Deletar** um sonho
+- [x] **Seed data** — 5 sonhos fictícios pré-cadastrados para demonstração pública da aplicação (via `seed.sql`)
+
+> ✅ Todos os endpoints implementados na API (Fase 2). Interface visual pendente (Fase 3 — PHP).
 
 ### Parte 2 — Melhorias
 
@@ -143,7 +145,7 @@ Para que qualquer pessoa possa testar a aplicação sem precisar cadastrar seus 
 ├── Criar o projeto ASP.NET Core Web API
 ├── Configurar conexão com o PostgreSQL via Dapper
 ├── Implementar endpoints CRUD para sonhos
-└── Implementar endpoints para tags
+└── Implementar endpoints de associação de tags aos sonhos (POST/DELETE /api/dreams/{id}/tags/{tagId})
 
 🖥️ Fase 3 — Frontend: Interface em PHP
 ├── Criar páginas HTML + PHP
@@ -211,7 +213,7 @@ Certifique-se de ter instalado:
   ```bash
   dotnet run
 
-* A API estara disponivel em `https://localhost:5001` (ou outra porta configurada).
+* A API estara disponivel em `http://localhost:5217` (porta configurada no launchSettings.json).
 
 4. Configure o Frontend (PHP)
 
@@ -234,9 +236,15 @@ amendoas-dreams/
 ├── backend/
 │   └── AmendoasDreams.Api/          # API em C# .NET 8
 │       ├── Controllers/
+│       │   ├── DreamsController.cs
+│       │   └── TagsController.cs
+│       ├── Infrastructure/          # TypeHandlers do Dapper (DateOnly, TimeOnly)
+│       │   └── DapperTypeHandlers.cs
 │       ├── Models/
-│       ├── Data/                    # Dapper queries e conexão
-│       ├── appsettings.json
+│       │   ├── Dream.cs
+│       │   └── Tag.cs
+│       ├── Properties/
+│       │   └── launchSettings.json
 │       └── Program.cs
 ├── frontend/
 │   ├── index.php                    # Listagem de sonhos
