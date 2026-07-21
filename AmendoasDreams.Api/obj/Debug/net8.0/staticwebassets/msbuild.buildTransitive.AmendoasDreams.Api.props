@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/AmendoasDreams.Api.props" />
-</Project>
